@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.uneb.labweb.spring_project.enums.Category;
 import com.uneb.labweb.spring_project.model.Course;
 import com.uneb.labweb.spring_project.repository.CourseRepository;
 
@@ -15,13 +16,13 @@ public class SpringProjectApplication {
         SpringApplication.run(SpringProjectApplication.class, args);
     }
 
-	@Bean
+    @Bean
     CommandLineRunner initDatabase(CourseRepository courseRepository) {
         return args -> {
             courseRepository.deleteAll();
             Course c = new Course();
             c.setName("Curso Angular");
-            c.setCategory("Front-end");
+            c.setCategory(Category.FRONT_END);
             courseRepository.save(c);
         };
     }
