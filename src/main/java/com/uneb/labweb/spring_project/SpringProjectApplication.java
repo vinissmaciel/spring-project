@@ -21,22 +21,24 @@ public class SpringProjectApplication {
     CommandLineRunner initDatabase(CourseRepository courseRepository) {
         return args -> {
             courseRepository.deleteAll();
-            Course c = new Course();
-            c.setName("Curso Angular");
-            c.setCategory(Category.FRONT_END);
+            for (int i = 0; i < 20; i++) {
+                Course c = new Course();
+                c.setName("Curso Angular " + i);
+                c.setCategory(Category.FRONT_END);
 
-            Lesson l = new Lesson();
-            l.setName("Introdução Ao Angular");
-            l.setLinkLesson("https://www.uneb.br");
-            l.setCourse(c);
-            c.getLessons().add(l);
+                Lesson l = new Lesson();
+                l.setName("Introdução Ao Angular");
+                l.setLinkLesson("https://www.uneb.br");
+                l.setCourse(c);
+                c.getLessons().add(l);
 
-            l = new Lesson();
-            l.setName("Instalando e Configurando Angular");
-            l.setLinkLesson("https://www.uneb.br");
-            l.setCourse(c);
-            c.getLessons().add(l);
-            courseRepository.save(c);
+                l = new Lesson();
+                l.setName("Instalando e Configurando Angular");
+                l.setLinkLesson("https://www.uneb.br");
+                l.setCourse(c);
+                c.getLessons().add(l);
+                courseRepository.save(c);
+            }
         };
     }
 

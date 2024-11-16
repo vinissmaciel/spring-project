@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.uneb.labweb.spring_project.enums.Category;
+import com.uneb.labweb.spring_project.enums.ValueOfEnum;
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 public record CourseDTO(
         Long id,
@@ -16,8 +20,11 @@ public record CourseDTO(
         String name,
         @NotNull
         @Length(max = 10)
-        @Pattern(regexp = "Back-end|Front-end")
+        @ValueOfEnum(enumClass = Category.class)
         String category,
+        @NotNull
+        @NotEmpty
+        @Valid
         List<LessonDTO> lessons) {
 
 }

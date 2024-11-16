@@ -9,6 +9,7 @@ import com.uneb.labweb.spring_project.dto.CourseDTO;
 import com.uneb.labweb.spring_project.dto.LessonDTO;
 import com.uneb.labweb.spring_project.enums.Category;
 import com.uneb.labweb.spring_project.model.Course;
+import com.uneb.labweb.spring_project.model.Lesson;
 
 @Component
 public class CourseMapper {
@@ -41,6 +42,16 @@ public class CourseMapper {
         }
         course.setName(courseDTO.name());
         course.setCategory(converterCategoryValue(courseDTO.category()));
+        
+        List<Lesson> lessons = courseDTO.lessons().stream().map((lessonDTO) -> {
+            var lesson = new Lesson();
+            lesson.setId(lessonDTO.id());
+            lesson.setName(lessonDTO.name());
+            lesson.setLinkLesson(lessonDTO.linkLesson());
+            lesson.setCourse(course);
+            return lesson;
+        }).collect(Collectors.toList());
+        course.setLessons(lessons);
         return course;
     }
 
